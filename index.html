@@ -11,6 +11,7 @@
 
 
 
+
 <meta name="theme-color" content="#49E8CC">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -226,12 +227,16 @@ main{padding:24px 0 60px}
 .sheet{background:var(--card);color:var(--ink);border-radius:18px;max-width:760px;width:100%;max-height:85%;overflow:auto;padding:18px}
 .sheethead{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .swaplist{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:10px}
-.swapopt{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:8px;cursor:pointer;color:var(--ink)}
+.swapopt{display:grid;grid-template-columns:56px minmax(0,1fr);gap:10px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:8px;cursor:pointer;color:var(--ink)}
 .swapopt:hover{border-color:var(--mint)}
 .swapopt.cur{outline:2px solid var(--mint)}
 .swapopt b{display:block;font-size:15.5px;line-height:1.25}
 .swapopt small{color:var(--muted);font-variant-numeric:tabular-nums}
-.swapopt img{width:56px;height:56px;border-radius:50%;object-fit:cover}
+.swapopt img{width:56px;height:56px;border-radius:50%;object-fit:cover;display:block}
+.swapopt svg{width:56px;height:56px;display:block}
+.swapopt>*{min-width:0}
+.swapopt b{overflow-wrap:break-word;hyphens:auto;-webkit-hyphens:auto}
+.mbtn svg,.mbtn img{width:100%;height:auto}
 .pantrybtn{border:1px solid var(--line);background:transparent;border-radius:999px;padding:1px 8px;font-size:13px;font-weight:700;cursor:pointer;color:var(--muted);white-space:nowrap}
 .pantrybtn:hover{border-color:var(--mint);color:var(--ink)}
 .shop li label{grid-template-columns:22px 1fr auto}
@@ -544,7 +549,7 @@ const DRAW={
 };
 const SLOTS={plate:[[42,52],[82,40],[82,80],[50,86]],bowl:[[50,50],[74,44],[70,74],[46,76]]};
 function pic(m,size=120){
-  const t=m.tags, v=m.vessel; let s=`<svg viewBox="0 0 120 120" role="img" aria-label="${esc(m.name)}" xmlns="http://www.w3.org/2000/svg">`;
+  const t=m.tags, v=m.vessel; let s=`<svg viewBox="0 0 120 120" width="${size}" height="${size}" role="img" aria-label="${esc(m.name)}" xmlns="http://www.w3.org/2000/svg">`;
   if(v==='glass'){
     const layers=t.includes('smoothie')?[['#8C3D6E',1]]:t.includes('chocpud')?[['#F7F4EA',.35],['#5A3523',.65]]:[['#F7F4EA',.55],['#6B2A63',.45]];
     s+=`<ellipse cx="60" cy="108" rx="30" ry="6" fill="#000" opacity=".08"/><path d="M38 22 L44 104 H76 L82 22 Z" fill="#EEF3F5" stroke="#B9C7CC" stroke-width="2"/>`;
